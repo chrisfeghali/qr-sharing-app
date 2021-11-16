@@ -8,15 +8,15 @@ import {
   Route,
 } from "react-router-dom";
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+// import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
+// const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
 
 // Initialize Firebase
-initializeApp(firebaseConfig);
+// initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
