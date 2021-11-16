@@ -12,10 +12,12 @@ import {
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-const firebaseConfigString = process.env.REACT_APP_FIREBASE_CONFIG;
+const firebaseConfigString = JSON.stringify(
+  process.env.REACT_APP_FIREBASE_CONFIG
+);
 console.log(`Firebase config is ${firebaseConfigString}`);
 
-const firebaseConfig = JSON.parse(firebaseConfigString);
+const firebaseConfig = JSON.parse(JSON.parse(firebaseConfigString));
 
 console.log(`Firebase config parsed is ${firebaseConfig}`);
 // console.log(
