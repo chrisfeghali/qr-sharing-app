@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - main
+
+env: 
+  REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_CONFIG }}
+  
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -26,5 +30,4 @@ jobs:
         with:
           branch: gh-pages
           folder: build
-        env: 
-          REACT_APP_FIREBASE_CONFIG: ${{ secrets.REACT_APP_FIREBASE_CONFIG }}
+        
