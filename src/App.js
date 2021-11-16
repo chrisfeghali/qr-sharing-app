@@ -9,8 +9,9 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          {JSON.stringify(firebaseApp.options)}
-          {console.log(`Firebase options are ${firebaseApp.options}`)}
+          {console.log(
+            `Firebase options are ${firebaseApp.options.storageBucket}`
+          )}
           <br></br>
           Edit <code>src/App.js</code> and save to reload.
         </p>
