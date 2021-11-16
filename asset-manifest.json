@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/qr-sharing-app/static/css/main.8c8b27cf.chunk.css",
-    "main.js": "/qr-sharing-app/static/js/main.0d20aeaf.chunk.js",
-    "main.js.map": "/qr-sharing-app/static/js/main.0d20aeaf.chunk.js.map",
+    "main.js": "/qr-sharing-app/static/js/main.32832872.chunk.js",
+    "main.js.map": "/qr-sharing-app/static/js/main.32832872.chunk.js.map",
     "runtime-main.js": "/qr-sharing-app/static/js/runtime-main.c9487377.js",
     "runtime-main.js.map": "/qr-sharing-app/static/js/runtime-main.c9487377.js.map",
     "static/js/2.fc9727fd.chunk.js": "/qr-sharing-app/static/js/2.fc9727fd.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.c9487377.js",
     "static/js/2.fc9727fd.chunk.js",
     "static/css/main.8c8b27cf.chunk.css",
-    "static/js/main.0d20aeaf.chunk.js"
+    "static/js/main.32832872.chunk.js"
   ]
 }
