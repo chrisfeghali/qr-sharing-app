@@ -13,17 +13,17 @@ import { initializeApp } from "firebase/app";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 console.log(`Firebase config is ${process.env.REACT_APP_FIREBASE_CONFIG}`);
-console.log(
-  `Firebase config JSON Parsed is ${JSON.parse(
-    process.env.REACT_APP_FIREBASE_CONFIG
-  )}`
-);
+// console.log(
+//   `Firebase config JSON Parsed is ${JSON.parse(
+//     process.env.REACT_APP_FIREBASE_CONFIG
+//   )}`
+// );
 
-// Your web app's Firebase configuration
-const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
-console.log(`Firebase config is ${firebaseConfig}`);
+// // Your web app's Firebase configuration
+// const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
+// console.log(`Firebase config is ${firebaseConfig}`);
 // Initialize Firebase
-initializeApp(firebaseConfig);
+// initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>
