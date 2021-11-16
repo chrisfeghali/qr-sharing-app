@@ -12,6 +12,13 @@ import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+console.log(`Firebase config is ${process.env.REACT_APP_FIREBASE_CONFIG}`);
+console.log(
+  `Firebase config JSON Parsed is ${JSON.parse(
+    process.env.REACT_APP_FIREBASE_CONFIG
+  )}`
+);
+
 // Your web app's Firebase configuration
 const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
 console.log(`Firebase config is ${firebaseConfig}`);
