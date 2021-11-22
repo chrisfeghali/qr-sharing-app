@@ -1,29 +1,14 @@
-import logo from "./logo.svg";
 import "./App.css";
-import { getApps } from "firebase/app";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./components/login/Login";
 
-function App() {
-  const firebaseApp = getApps()[0];
+function App(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {console.log(
-            `Firebase options are ${firebaseApp.options.storageBucket}`
-          )}
-          <br></br>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-fluid">
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/qr-sharing-app" />} />
+        <Route path="/qr-sharing-app" element={<Login />} />
+      </Routes>
     </div>
   );
 }
