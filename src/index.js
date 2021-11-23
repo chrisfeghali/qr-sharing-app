@@ -2,14 +2,19 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { Provider as ReduxProvider } from "react-redux";
 import configureStore from "./redux/configureStore";
+import "bootstrap/dist/css/bootstrap.min.css";
 const store = configureStore();
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -44,7 +49,10 @@ ReactDOM.render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       <Router>
-        <App />
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/qr-sharing-app" />} />
+          <Route path="/qr-sharing-app/*" element={<App />} />
+        </Routes>
       </Router>
     </ReduxProvider>
   </React.StrictMode>,

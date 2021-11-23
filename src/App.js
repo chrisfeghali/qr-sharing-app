@@ -1,13 +1,33 @@
 import "./App.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./components/login/Login";
+import Signin from "./components/signin/Signin";
+import Signup from "./components/signup/Signup";
+import Home from "./components/home/Home";
+import Landing from "./components/landing/Landing";
 
 function App(props) {
+  let auth = props.auth;
+  auth = false;
   return (
-    <div className="container-fluid">
+    <div>
       <Routes>
-        <Route path="/" element={<Navigate replace to="/qr-sharing-app" />} />
-        <Route path="/qr-sharing-app" element={<Login />} />
+        <Route
+          path="/"
+          element={
+            auth ? (
+              <Navigate replace to="home" />
+            ) : (
+              <Navigate replace to="landing" />
+            )
+          }
+        />
+        <Route path="/home" element={<Home />} />
+        <Route path="/landing" element={<Landing />}>
+          <Route index element={<Navigate replace to="signin" />} />
+          <Route path="signin" element={<Signin />} />
+          <Route path="signup" element={<Signup />} />
+        </Route>
       </Routes>
     </div>
   );
