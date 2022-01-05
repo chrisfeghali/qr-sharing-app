@@ -34,3 +34,48 @@
     transform: rotate(360deg);
   }
 }
+
+.Sign-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Sign {
+  font-size: 1rem;
+}
+
+.Sign-form {
+  color: rgb(95, 95, 95);
+}
+
+.Sign .Sign-link {
+  color: #bf54fa;
+}
+
+.Sign-password {
+  display: flex;
+  flex-direction: column;
+}
+
+.Sign-signin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.Sign-password-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Sign-signin-button {
+  width: 30%;
+}
+
+.Sign-feedback-text {
+  text-align: start;
+  padding-left: 1rem;
+}

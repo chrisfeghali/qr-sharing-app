@@ -8,29 +8,10 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue } from "firebase/database";
-import { Provider as ReduxProvider } from "react-redux";
-import configureStore from "./redux/configureStore";
 import "bootstrap/dist/css/bootstrap.min.css";
-const store = configureStore();
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { app } from "./apis/firebase";
+import { getDatabase, ref, onValue } from "firebase/database";
 
-const firebaseConfigString = JSON.stringify(
-  process.env.REACT_APP_FIREBASE_CONFIG
-);
-console.log(`Firebase config is ${firebaseConfigString}`);
-
-const firebaseConfig = JSON.parse(JSON.parse(firebaseConfigString));
-
-console.log(`Firebase config parsed is ${firebaseConfig}`);
-
-// // Your web app's Firebase configuration
-// const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const userid = 1;
 const firstName = ref(database, "Users/" + userid + "/name");
@@ -47,14 +28,12 @@ console.log(database);
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReduxProvider store={store}>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Navigate replace to="/qr-sharing-app" />} />
-          <Route path="/qr-sharing-app/*" element={<App />} />
-        </Routes>
-      </Router>
-    </ReduxProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/qr-sharing-app" />} />
+        <Route path="/qr-sharing-app/*" element={<App />} />
+      </Routes>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
