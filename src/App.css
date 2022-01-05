@@ -4,19 +4,7 @@
   padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
 .App-header {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,56 +14,9 @@
   color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Link {
+  color: var(--bs-secondary);
 }
-
-.Sign-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.Sign {
-  font-size: 1rem;
-}
-
-.Sign-form {
-  color: rgb(95, 95, 95);
-}
-
-.Sign .Sign-link {
-  color: #bf54fa;
-}
-
-.Sign-password {
-  display: flex;
-  flex-direction: column;
-}
-
-.Sign-signin {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1em;
-}
-
-.Sign-password-bottom {
-  display: flex;
-  justify-content: space-between;
-}
-
-.Sign-signin-button {
-  width: 30%;
-}
-
-.Sign-feedback-text {
-  text-align: start;
-  padding-left: 1rem;
+.Link:focus {
+  box-shadow: none;
 }

@@ -6,6 +6,7 @@ import Signin from "./components/signin/Signin";
 import Signup from "./components/signup/Signup";
 import Home from "./components/home/Home";
 import Landing from "./components/landing/Landing";
+import ErrorPage from "./components/errorPage/ErrorPage";
 import RequireAuth from "./components/RequireAuth";
 import RequireNonAuth from "./components/RequireNonAuth";
 
@@ -16,7 +17,7 @@ function App(props) {
         <Routes>
           <Route index element={<Navigate replace to="home" />} />
           <Route
-            path="/home"
+            path="home"
             element={
               <RequireAuth>
                 <Home />
@@ -24,7 +25,7 @@ function App(props) {
             }
           />
           <Route
-            path="/landing"
+            path="landing"
             element={
               <RequireNonAuth>
                 <Landing />
@@ -35,6 +36,7 @@ function App(props) {
             <Route path="signin" element={<Signin />} />
             <Route path="signup" element={<Signup />} />
           </Route>
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </AuthProvider>
     </div>

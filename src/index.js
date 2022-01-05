@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
+import "./custom.scss";
 import App from "./App";
 import {
   BrowserRouter as Router,
@@ -8,7 +9,6 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { app } from "./apis/firebase";
 import { getDatabase, ref, onValue } from "firebase/database";
 
@@ -28,10 +28,10 @@ console.log(database);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
+    <Router basename="/qr-sharing-app">
       <Routes>
-        <Route path="/" element={<Navigate replace to="/qr-sharing-app" />} />
-        <Route path="/qr-sharing-app/*" element={<App />} />
+        {/* <Route path="/" element={<Navigate replace to="/qr-sharing-app" />} /> */}
+        <Route path="/*" element={<App />} />
       </Routes>
     </Router>
   </React.StrictMode>,

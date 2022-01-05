@@ -68,7 +68,7 @@ function Signin(props) {
         <span className="fs-3 mb-2">Sign In</span>
         <div className="Sign-header-links">
           <LinkContainer to="../signup">
-            <Button variant="link" className="Sign-link fs-5">
+            <Button variant="link" className="Link fs-5">
               Sign up
             </Button>
           </LinkContainer>
@@ -95,7 +95,7 @@ function Signin(props) {
             Sign in
           </Button>
           <LinkContainer to="../signup" className="Signin-forgot-password">
-            <Button variant="link" className="Sign-link fs-5">
+            <Button variant="link" className="Link fs-5">
               Forgot Password?
             </Button>
           </LinkContainer>

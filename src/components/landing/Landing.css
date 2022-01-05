@@ -9,12 +9,11 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .Landing-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: Landing-logo-spin infinite 20s linear;
   }
 }
 
 .Landing-contents {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: row;
@@ -25,10 +24,6 @@
   gap: 2em;
 }
 
-.Landing-link {
-  color: #61dafb;
-}
-
 @keyframes Landing-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,4 +31,45 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.Sign-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Sign {
+  font-size: 1rem;
+}
+
+.Sign-form {
+  color: rgb(95, 95, 95);
+}
+
+.Sign-password {
+  display: flex;
+  flex-direction: column;
+}
+
+.Sign-signin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.Sign-password-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Sign-signin-button {
+  width: 30%;
+}
+
+.Sign-feedback-text {
+  text-align: start;
+  padding-left: 1rem;
 }

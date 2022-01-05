@@ -23,11 +23,7 @@ function Home(props) {
           </div>
         </div>
         <div className="Sign-header-links">
-          <Button
-            variant="link"
-            className="Sign-link fs-5"
-            onClick={handleLogout}
-          >
+          <Button variant="link" className="Link fs-5" onClick={handleLogout}>
             Sign Out
           </Button>
         </div>

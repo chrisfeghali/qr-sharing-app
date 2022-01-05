@@ -83,7 +83,7 @@ function Signup() {
         <span className="fs-3 mb-2">Sign Up</span>
         <div className="Sign-header-links">
           <LinkContainer to="../signin">
-            <Button variant="link" className="Sign-link fs-5">
+            <Button variant="link" className="Link fs-5">
               Sign in
             </Button>
           </LinkContainer>
@@ -123,9 +123,12 @@ function Signup() {
             value === watch("Password") || "Passwords do not match."
           }
         />
-        <Button className="Sign-signin-button" type="submit">
-          Sign up
-        </Button>
+        <div className="Sign-password-bottom mt-2  ">
+          <Button className="Sign-signin-button" type="submit">
+            Sign up
+          </Button>
+          <div></div>
+        </div>
       </Form>
     </div>
   );
