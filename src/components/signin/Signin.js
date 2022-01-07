@@ -94,7 +94,10 @@ function Signin(props) {
           <Button className="Sign-signin-button" type="submit">
             Sign in
           </Button>
-          <LinkContainer to="../signup" className="Signin-forgot-password">
+          <LinkContainer
+            to="../resetpassword"
+            className="Signin-forgot-password"
+          >
             <Button variant="link" className="Link fs-5">
               Forgot Password?
             </Button>
