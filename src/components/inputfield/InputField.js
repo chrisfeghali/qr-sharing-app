@@ -37,10 +37,14 @@ const InputField = ({
         })}
         type={type}
         placeholder={label}
-        isInvalid={errors[label]}
+        isInvalid={errors[label] && errors[label].type !== "success"}
+        isValid={errors[label] && errors[label].type === "success"}
       />
       <Form.Control.Feedback type="invalid" className="Sign-feedback-text mt-1">
-        {errors[label]?.message}
+        {errors[label]?.type !== "success" ? errors[label]?.message : ""}
+      </Form.Control.Feedback>
+      <Form.Control.Feedback type="valid" className="Sign-feedback-text mt-1">
+        {errors[label]?.type === "success" ? errors[label]?.message : ""}
       </Form.Control.Feedback>
     </FloatingLabel>
   </>
