@@ -21,12 +21,7 @@ function Signin(props) {
   const navigate = useNavigate();
   const onSubmit = async (data) => {
     try {
-      const userCredential = await signIn(
-        data["Email Address"],
-        data["Password"]
-      );
-      const user = userCredential.user;
-      console.log(user);
+      await signIn(data["Email Address"], data["Password"]);
       navigate("/", { replace: true });
     } catch (error) {
       switch (error.code) {
