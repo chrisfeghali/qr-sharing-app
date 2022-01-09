@@ -1,8 +1,10 @@
 import "./Signin.css";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { LinkContainer } from "react-router-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 import InputField from "../inputfield/InputField";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -17,8 +19,10 @@ function Signin(props) {
   } = useForm({
     mode: "onBlur", // "onChange"
   });
-  const { signIn } = useAuth();
+  const { signIn, signInPopup } = useAuth();
   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const onSubmit = async (data) => {
     try {
       await signIn(data["Email Address"], data["Password"]);
@@ -54,6 +58,53 @@ function Signin(props) {
           alert(error.message, "Error during sign in, please contact me");
           break;
       }
+    }
+  };
+
+  const googleSignIn = async () => {
+    try {
+      await signInPopup();
+      navigate("/", { replace: true });
+    } catch (error) {
+      switch (error.code) {
+        case "auth/account-exists-with-different-credential":
+          setErrorMessage(
+            "An account already exists with this email, contact me because this isn't supposed to happen"
+          );
+          break;
+        case "auth/auth-domain-config-required":
+          setErrorMessage(
+            "Auth domain config not provided. I don't know what that means either, but contact me because this isn't supposed to happen"
+          );
+          break;
+        case "auth/cancelled-popup-request":
+          setErrorMessage(
+            "Only one popup request is allowed at a time, maybe stop pressing the button?"
+          );
+          break;
+        case "auth/operation-not-allowed":
+          setErrorMessage("Your account isn't enabled, contact me");
+          break;
+        case "auth/operation-not-supported-in-this-environment":
+          setErrorMessage("Your environment is supported, where are you??");
+          break;
+        case "auth/popup-blocked":
+          setErrorMessage(
+            "The popup was blocked, would you mind enabling them?"
+          );
+          break;
+        case "auth/popup-closed-by-user":
+          setErrorMessage("You closed the popup before signing in, ya dingus");
+          break;
+        case "auth/unauthorized-domain":
+          setErrorMessage(
+            "The app domain isn't authorised for OAuth, contact me because this isn't supposed to happen"
+          );
+          break;
+        default:
+          setErrorMessage(error.code);
+      }
+      setShow(true);
     }
   };
 
@@ -99,9 +150,20 @@ function Signin(props) {
           </LinkContainer>
         </div>
       </Form>
-      <div className="Sign-signin">
+      <div className="Sign-signin position-relative">
         <span className="fs-3">OR</span>
-        <GoogleButton>Sign in with Google</GoogleButton>
+        <GoogleButton onClick={googleSignIn}>Sign in with Google</GoogleButton>
+        <Alert
+          className="position-absolute top-100 start-50 translate-middle"
+          variant="danger"
+          show={show}
+          onClose={() => {
+            setShow(false);
+          }}
+          dismissible
+        >
+          <Alert.Heading>{errorMessage}</Alert.Heading>
+        </Alert>
       </div>
     </div>
   );

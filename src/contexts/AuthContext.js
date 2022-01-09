@@ -9,9 +9,12 @@ import {
   updatePassword as authUpdatePassword,
   updateProfile as authUpdateProfile,
   onAuthStateChanged,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from "firebase/auth";
 
 const AuthContext = React.createContext();
+const provider = new GoogleAuthProvider();
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -27,6 +30,10 @@ export function AuthProvider({ children }) {
 
   function signIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
+  }
+
+  function signInPopup() {
+    return signInWithPopup(auth, provider);
   }
 
   function signOut() {
@@ -61,6 +68,7 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     signIn,
+    signInPopup,
     signUp,
     signOut,
     resetPassword,
