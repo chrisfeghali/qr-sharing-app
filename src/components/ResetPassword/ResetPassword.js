@@ -17,12 +17,10 @@ function ResetPassword() {
   });
 
   const { resetPassword } = useAuth();
-  const [showAlertSuccess, setAlertSuccess] = useState(false);
 
   const onSubmit = async (data) => {
     try {
       await resetPassword(data["Email Address"]);
-      setAlertSuccess(true);
       setError(
         "Email Address",
         {
@@ -83,15 +81,11 @@ function ResetPassword() {
           <Button className="Sign-signin-button" type="submit">
             Submit
           </Button>
-          {showAlertSuccess ? (
-            <LinkContainer to="../signin" className="Signin-forgot-password">
-              <Button variant="link" className="Link fs-5">
-                Sign in
-              </Button>
-            </LinkContainer>
-          ) : (
-            ""
-          )}
+          <LinkContainer to="../signin" className="Signin-forgot-password">
+            <Button variant="link" className="Link fs-5">
+              Sign in
+            </Button>
+          </LinkContainer>
         </div>
       </Form>
     </div>
