@@ -1,0 +1,59 @@
+.collapsible-button-parent,
+.collapsible-button-parent .collapsing,
+.collapsible-button-parent .show {
+  border-bottom: 1px solid var(--bs-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.collapsible-button-parent .collapsible-button::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.85%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform 0.35s ease;
+  transform-origin: 0.5em 50%;
+}
+.collapsible-button[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.collapsible-button-parent .collapsible-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  background-color: transparent;
+  border: 0;
+  width: 100%;
+  border-radius: 0;
+}
+
+.collapsible-button:focus,
+.collapsible-button:active,
+.collapsible-button:active:focus,
+.collapsible-children > *:focus,
+.collapsible-children > *:active,
+.collapsible-children > *:active:focus {
+  outline: 1px solid var(--bs-primary);
+  box-shadow: none;
+}
+
+.collapsible-button:hover,
+.collapsible-button-parent .collapsible-children > *:hover {
+  background-color: var(--bs-primary);
+}
+
+.collapsible-button-parent .collapsible-children > * {
+  padding: 0.25rem 2rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: start;
+  align-items: center;
+  padding: 0.25rem 2rem;
+  font-weight: 600;
+  background-color: transparent;
+  border: 0;
+  width: 100%;
+  border-radius: 0;
+  white-space: nowrap;
+}

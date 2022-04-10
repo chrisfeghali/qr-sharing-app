@@ -5,8 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputField from "../inputfield/InputField";
 import { useAuth } from "../../contexts/AuthContext";
-import { updateProfile } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { CreateUserInDatabase } from "../../apis/firebase";
 
 function Signup() {
   const {
@@ -19,21 +18,17 @@ function Signup() {
     mode: "onBlur", // "onChange"
   });
 
-  const { signUp } = useAuth();
-  const navigate = useNavigate();
+  const { signUpAndUpdateName } = useAuth();
 
   const onSubmit = async (data) => {
     try {
-      const userCredential = await signUp(
+      const signUpResult = await signUpAndUpdateName(
         data["Email Address"],
-        data["Password"]
+        data["Password"],
+        data["Name"]
       );
-      const user = userCredential.user;
-      console.log(user);
-      //TODO error handling for this
-      await updateProfile(user, { displayName: data["Name"] });
-
-      navigate("/", { replace: true });
+      const user = signUpResult.user;
+      await CreateUserInDatabase(user.uid, data["Name"]);
     } catch (error) {
       switch (error.code) {
         //errors after returning from auth server, shouldn't hit any of these except for email-alrady-in-use

@@ -7,8 +7,9 @@ import Form from "react-bootstrap/Form";
 import Alert from "react-bootstrap/Alert";
 import InputField from "../inputfield/InputField";
 import { useAuth } from "../../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
 import GoogleButton from "react-google-button";
+import { CreateUserInDatabase } from "../../apis/firebase";
+import { getAdditionalUserInfo } from "firebase/auth";
 
 function Signin(props) {
   const {
@@ -20,13 +21,11 @@ function Signin(props) {
     mode: "onBlur", // "onChange"
   });
   const { signIn, signInPopup } = useAuth();
-  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const onSubmit = async (data) => {
     try {
       await signIn(data["Email Address"], data["Password"]);
-      navigate("/", { replace: true });
     } catch (error) {
       switch (error.code) {
         //errors after returning from auth server, shouldn't hit any of these except for email-alrady-in-use
@@ -63,8 +62,18 @@ function Signin(props) {
 
   const googleSignIn = async () => {
     try {
-      await signInPopup();
-      navigate("/", { replace: true });
+      const signInResult = await signInPopup();
+      const userAdditionalInfo = getAdditionalUserInfo(signInResult);
+      if (userAdditionalInfo.isNewUser) {
+        try {
+          await CreateUserInDatabase(
+            signInResult.user.uid,
+            signInResult.user.displayName
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      }
     } catch (error) {
       switch (error.code) {
         case "auth/account-exists-with-different-credential":

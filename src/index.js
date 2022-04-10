@@ -4,22 +4,6 @@ import ReactDOM from "react-dom";
 import "./custom.scss";
 import App from "./App";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { app } from "./apis/firebase";
-import { getDatabase, ref, onValue } from "firebase/database";
-
-const database = getDatabase(app);
-const userid = 1;
-const firstName = ref(database, "Users/" + userid + "/name");
-let firstNameVal = "";
-
-onValue(firstName, (snapshot) => {
-  firstNameVal = snapshot.val();
-  console.log(firstNameVal);
-});
-
-console.log(firstNameVal);
-
-console.log(database);
 
 ReactDOM.render(
   <React.StrictMode>

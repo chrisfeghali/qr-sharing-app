@@ -1,0 +1,64 @@
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .collapsible-bar-button {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+.collapsible-bar-button {
+  height: 3rem;
+  pointer-events: stroke;
+  margin: 20px;
+}
+
+.empty-space {
+  height: 1rem;
+  width: 15vw;
+}
+
+.sidebar-text-input:focus-visible {
+  outline:none;
+}
+
+.sidebar-button {
+  padding: 0.25rem 2rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: start;
+  align-items: center;
+  padding: 0.25rem 2rem;
+  font-weight: 600;
+  background-color: transparent;
+  border: 0;
+  width: 100%;
+  border-radius: 0;
+  border-bottom: 1px solid var(--bs-primary);
+}
+
+.sidebar-border-top {
+  border-top: 1px solid var(--bs-primary);
+}
+
+
+
+.sidebar .sidebar-button:focus,
+.sidebar .sidebar-button:active:focus,
+.sidebar .sidebar-button:active {
+  outline: 1px solid var(--bs-primary);
+  box-shadow: none;
+}
+
+
+.sidebar .sidebar-button:focus {
+  background-color: transparent;
+  outline: none;
+}
+
+.sidebar .sidebar-button:hover {
+  background-color: var(--bs-primary);
+}

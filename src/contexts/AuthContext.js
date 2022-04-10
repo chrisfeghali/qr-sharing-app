@@ -23,6 +23,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [, setNewUserName] = useState(false);
 
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -56,20 +57,29 @@ export function AuthProvider({ children }) {
     return authUpdateProfile(currentUser, { displayName: userName });
   }
 
+  async function signUpAndUpdateName(email, password, userName) {
+    const signUpResult = await signUp(email, password);
+    await authUpdateProfile(signUpResult.user, {
+      displayName: userName,
+    });
+    setNewUserName(userName); //Without this the userName isn't updated on the first render
+    return signUpResult;
+  }
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, function (user) {
       setCurrentUser(user);
       setLoading(false);
     });
 
-    return unsubscribe;
+    return () => unsubscribe();
   }, []);
 
   const value = {
     currentUser,
     signIn,
     signInPopup,
-    signUp,
+    signUpAndUpdateName,
     signOut,
     resetPassword,
     updateEmail,

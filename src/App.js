@@ -10,6 +10,8 @@ import Landing from "./components/landing/Landing";
 import ErrorPage from "./components/errorPage/ErrorPage";
 import RequireAuth from "./components/RequireAuth";
 import RequireNonAuth from "./components/RequireNonAuth";
+import HomePage from "./components/HomePage/HomePage";
+import GroupPage from "./components/GroupPage/GroupPage";
 
 function App(props) {
   return (
@@ -24,7 +26,11 @@ function App(props) {
                 <Home />
               </RequireAuth>
             }
-          />
+          >
+            <Route index element={<Navigate replace to="homepage" />} />
+            <Route path="homepage" element={<HomePage />} />
+            <Route path="group/:groupID" element={<GroupPage />} />
+          </Route>
           <Route
             path="landing"
             element={

@@ -1,11 +1,55 @@
 .Home-contents {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 3vmin);
+  /* font-size: calc(10px + 3vmin); */
   color: white;
   gap: 2em;
+}
+
+.Home {
+  background-color: #282c34;
+  min-height: 100vh;
+}
+
+.Sign-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Sign {
+  font-size: 1rem;
+}
+
+.Sign-form {
+  color: rgb(95, 95, 95);
+}
+
+.Sign-password {
+  display: flex;
+  flex-direction: column;
+}
+
+.Sign-signin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+.Sign-password-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Sign-signin-button {
+  width: 30%;
+}
+
+.Sign-feedback-text {
+  text-align: start;
+  padding-left: 1rem;
 }

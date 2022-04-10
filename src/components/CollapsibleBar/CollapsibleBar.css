@@ -1,0 +1,11 @@
+.collapsible-bar-content {
+  background-color: #121417;
+  color: white;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+.collapsible-bar {
+  background-color: #121417;
+}
