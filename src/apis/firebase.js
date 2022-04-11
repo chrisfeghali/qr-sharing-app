@@ -36,7 +36,6 @@ let firebaseConfig = JSON.parse(JSON.parse(firebaseConfigString));
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
-console.log(database);
 
 // if (window.location.hostname === "localhost") {
 //   connectAuthEmulator(auth, "http://localhost:9099");
