@@ -50,12 +50,11 @@ const CreateUserInDatabase = async (uid, userName) => {
 
 const CreateGroup = async (uid, groupName) => {
   const newGroupKey = push(child(ref(database), "groups")).key;
-  const update1 = {};
-  const update2 = {};
-  update1[`/users/${uid}/groups/${newGroupKey}`] = true;
-  await update(ref(database), update1);
-  update2[`/groups/${newGroupKey}/name`] = groupName;
-  return update(ref(database), update2);
+  const updates = {};
+  updates[`/users/${uid}/groups/${newGroupKey}`] = true;
+  updates[`/groups/${newGroupKey}/name`] = groupName;
+  const updateVal = await update(ref(database), updates);
+  return updateVal;
 };
 
 const GetGroupName = async (groupName) => {

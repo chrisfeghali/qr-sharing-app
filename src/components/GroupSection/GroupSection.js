@@ -22,12 +22,16 @@ const GroupSection = () => {
 
   useEffect(() => {
     const fetchGroupNames = async () => {
-      let groupNames = [];
-      for (const [, value] of Object.entries(keys)) {
-        const groupName = await GetGroupName(value);
-        groupNames = [...groupNames, { value, groupName }];
+      try {
+        let groupNames = [];
+        for (const [, value] of Object.entries(keys)) {
+          const groupName = await GetGroupName(value);
+          groupNames = [...groupNames, { value, groupName }];
+        }
+        return setGroups(groupNames);
+      } catch (error) {
+        console.log(error);
       }
-      return setGroups(groupNames);
     };
 
     fetchGroupNames();
