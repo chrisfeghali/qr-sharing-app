@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/qr-sharing-app/static/css/main.a63f5ca8.chunk.css",
+    "main.js": "/qr-sharing-app/static/js/main.265881f4.chunk.js",
+    "main.js.map": "/qr-sharing-app/static/js/main.265881f4.chunk.js.map",
+    "runtime-main.js": "/qr-sharing-app/static/js/runtime-main.c9487377.js",
+    "runtime-main.js.map": "/qr-sharing-app/static/js/runtime-main.c9487377.js.map",
+    "static/js/2.efdfdaab.chunk.js": "/qr-sharing-app/static/js/2.efdfdaab.chunk.js",
+    "static/js/2.efdfdaab.chunk.js.map": "/qr-sharing-app/static/js/2.efdfdaab.chunk.js.map",
+    "index.html": "/qr-sharing-app/index.html",
+    "static/css/main.a63f5ca8.chunk.css.map": "/qr-sharing-app/static/css/main.a63f5ca8.chunk.css.map",
+    "static/js/2.efdfdaab.chunk.js.LICENSE.txt": "/qr-sharing-app/static/js/2.efdfdaab.chunk.js.LICENSE.txt",
+    "static/media/logo.0aec9156.svg": "/qr-sharing-app/static/media/logo.0aec9156.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c9487377.js",
+    "static/js/2.efdfdaab.chunk.js",
+    "static/css/main.a63f5ca8.chunk.css",
+    "static/js/main.265881f4.chunk.js"
+  ]
+}
