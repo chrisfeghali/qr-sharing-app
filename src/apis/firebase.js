@@ -31,13 +31,12 @@ let firebaseConfig = JSON.parse(JSON.parse(firebaseConfigString));
 
 // console.log(`Firebase config parsed is ${JSON.stringify(firebaseConfig)}`);
 
-// // Your web app's Firebase configuration
 //const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const database = getDatabase(app);
-// console.log(database);
+console.log(database);
 
 // if (window.location.hostname === "localhost") {
 //   connectAuthEmulator(auth, "http://localhost:9099");
