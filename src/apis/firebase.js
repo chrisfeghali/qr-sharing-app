@@ -20,7 +20,7 @@ import { getAuth } from "firebase/auth";
 const firebaseConfigString = JSON.stringify(
   process.env.REACT_APP_FIREBASE_CONFIG
 );
-// console.log(`Firebase config is ${firebaseConfigString}`);
+console.log(`Firebase config is ${firebaseConfigString}`);
 
 let firebaseConfig = JSON.parse(JSON.parse(firebaseConfigString));
 
@@ -32,7 +32,7 @@ let firebaseConfig = JSON.parse(JSON.parse(firebaseConfigString));
 // console.log(`Firebase config parsed is ${JSON.stringify(firebaseConfig)}`);
 
 // // Your web app's Firebase configuration
-// const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
+//const firebaseConfig = JSON.parse(process.env.REACT_APP_FIREBASE_CONFIG);
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
