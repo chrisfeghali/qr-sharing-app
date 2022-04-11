@@ -83,7 +83,6 @@ export {
   set,
   get,
   child,
-  onValue,
   onChildAdded,
   DeleteGroup,
 };
