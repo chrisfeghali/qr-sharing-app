@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import { useAuth } from "../../contexts/AuthContext";
 
 const HomePage = () => {
-  const { currentUser, signOut } = useAuth();
+  const { userName, email, signOut } = useAuth();
   async function handleLogout() {
     await signOut();
   }
@@ -12,8 +12,8 @@ const HomePage = () => {
       <div>Home</div>
       <div>
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div>{currentUser.displayName}</div>
-          <div>{currentUser.email}</div>
+          <div>{userName}</div>
+          <div>{email}</div>
         </div>
       </div>
       <div className="Sign-header-links">

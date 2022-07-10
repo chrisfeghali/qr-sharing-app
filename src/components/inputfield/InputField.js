@@ -11,12 +11,15 @@ const InputField = ({
   minLength = 0,
   pattern,
   validate,
+  hide,
+  className,
 }) => (
   <>
     <FloatingLabel
       controlId={label}
       label={required === true ? `${label}*` : label}
-      className="mb-3"
+      className={"mb-3 me-3" + className}
+      style={{ visibility: hide === true ? "hidden" : undefined }}
     >
       <Form.Control
         {...register(label, {
@@ -28,7 +31,10 @@ const InputField = ({
             value: minLength,
             message: `Minimum length is ${minLength}`,
           },
-          required: `${label} is required`,
+          required: {
+            value: required,
+            message: `${label} is required`,
+          },
           pattern: {
             value: pattern,
             message: `A valid ${label} is required`,

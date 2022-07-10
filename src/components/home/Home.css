@@ -5,6 +5,7 @@
   justify-content: center;
   color: white;
   gap: 2em;
+  flex-wrap: wrap;
 }
 
 .Home {
@@ -24,6 +25,9 @@
 
 .Sign-form {
   color: rgb(95, 95, 95);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .Sign-password {

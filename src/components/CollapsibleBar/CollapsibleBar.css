@@ -4,8 +4,7 @@
   position: absolute;
   display: flex;
   flex-direction: column;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
-.collapsible-bar {
-  background-color: #121417;
-}

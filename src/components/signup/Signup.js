@@ -18,7 +18,7 @@ function Signup() {
     mode: "onBlur", // "onChange"
   });
 
-  const { signUpAndUpdateName } = useAuth();
+  const { signUpAndUpdateName, setUserName } = useAuth();
 
   const onSubmit = async (data) => {
     try {
@@ -27,6 +27,7 @@ function Signup() {
         data["Password"],
         data["Name"]
       );
+      setUserName(data["Name"]);
       const user = signUpResult.user;
       await CreateUserInDatabase(user.uid, data["Name"]);
     } catch (error) {
