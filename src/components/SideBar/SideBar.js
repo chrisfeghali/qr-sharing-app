@@ -21,6 +21,7 @@ const SideBar = () => {
           <Button className="sidebar-button sidebar-border-top">Home</Button>
         </LinkContainer>
         <CollapsibleButton
+          parentClassName="collapsible-border-bottom"
           buttonName="Groups"
           startOpen={true}
           buttonSrc={(props) => <Button {...props}></Button>}
@@ -28,18 +29,19 @@ const SideBar = () => {
           <GroupSection></GroupSection>
         </CollapsibleButton>
         <CollapsibleButton
+          parentClassName="collapsible-border-bottom"
           buttonName="Profile"
           startOpen={false}
           buttonSrc={(props) => <Button {...props}></Button>}
         >
-          <div className="h5">{userName}</div>
-          <div className="h5">{email}</div>
+          <div className="h5 final">{userName}</div>
+          <div className="h5 final">{email}</div>
           <LinkContainer to="/home/edit-profile">
-            <Button className="sidebar-button sidebar-border-top">
+            <Button className="sidebar-button sidebar-border-top final">
               Edit Profile
             </Button>
           </LinkContainer>
-          <Button>My Codes</Button>
+          <Button className="final">My Codes</Button>
         </CollapsibleButton>
         <div className="empty-space"></div>
       </CollapsibleBar>

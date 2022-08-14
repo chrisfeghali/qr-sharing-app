@@ -10,9 +10,14 @@ import Landing from "./components/landing/Landing";
 import ErrorPage from "./components/errorPage/ErrorPage";
 import RequireAuth from "./components/RequireAuth";
 import RequireNonAuth from "./components/RequireNonAuth";
+import RequireAdmin from "./components/RequireAdmin";
 import HomePage from "./components/HomePage/HomePage";
-import GroupPage from "./components/GroupPage/GroupPage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import CodePage from "./components/CodePage/CodePage";
+import MemberPage from "./components/MemberPage/MemberPage";
+import InvitePage from "./components/InvitePage/InvitePage";
+import EditGroupPage from "./components/EditGroupPage/EditGroupPage";
+import { GroupProvider } from "./contexts/GroupContext";
 
 function App(props) {
   return (
@@ -31,7 +36,46 @@ function App(props) {
             <Route index element={<Navigate replace to="homepage" />} />
             <Route path="homepage" element={<HomePage />} />
             <Route path="edit-profile" element={<ProfilePage />} />
-            <Route path="group/:groupID" element={<GroupPage />} />
+            <Route path="group/:groupID">
+              <Route index element={<Navigate replace to="codes" />} />
+              <Route
+                path="codes"
+                element={
+                  <GroupProvider>
+                    <CodePage />
+                  </GroupProvider>
+                }
+              />
+              <Route
+                path="members"
+                element={
+                  <GroupProvider>
+                    <MemberPage />
+                  </GroupProvider>
+                }
+              />
+
+              <Route
+                path="invites"
+                element={
+                  <GroupProvider>
+                    <RequireAdmin>
+                      <InvitePage />
+                    </RequireAdmin>
+                  </GroupProvider>
+                }
+              />
+              <Route
+                path="edit-group"
+                element={
+                  <GroupProvider>
+                    <RequireAdmin>
+                      <EditGroupPage />
+                    </RequireAdmin>
+                  </GroupProvider>
+                }
+              />
+            </Route>
           </Route>
           <Route
             path="landing"

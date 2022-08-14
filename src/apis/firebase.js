@@ -41,31 +41,52 @@ const database = getDatabase(app);
 //   connectAuthEmulator(auth, "http://localhost:9099");
 // }
 
-const CreateUserInDatabase = async (uid, userName) => {
-  await set(ref(database, `users/${uid}`), {
+const CreateUserInDatabase = async (userName) => {
+  await set(ref(database, `users/${auth.currentUser.uid}`), {
     username: userName,
   });
 };
 
-const CreateGroup = async (uid, groupName) => {
+const CreateGroup = async (groupName) => {
   const newGroupKey = push(child(ref(database), "groups")).key;
   const updates = {};
-  updates[`/users/${uid}/groups/${newGroupKey}`] = true;
+  updates[`/users/${auth.currentUser.uid}/groups/${newGroupKey}`] = true;
   updates[`/groups/${newGroupKey}/name`] = groupName;
   const updateVal = await update(ref(database), updates);
   return updateVal;
 };
 
-const GetGroupName = async (groupName) => {
+const GetGroupName = async (groupValue) => {
   const retrievedName = await get(
-    child(ref(database), `groups/${groupName}/name`)
+    child(ref(database), `groups/${groupValue}/name`)
   );
   return retrievedName.val();
 };
 
-const DeleteGroup = async (uid, groupKey) => {
+const GetAdmin = async (groupValue) => {
+  const admin = await get(
+    child(ref(database), `/users/${auth.currentUser.uid}/groups/${groupValue}`)
+  );
+  return admin.val();
+};
+
+const UpdateGroupName = async (groupValue, groupName) => {
+  const updates = {};
+  updates[`/groups/${groupValue}/name`] = groupName;
+  const nameChange = await (
+    await get(child(ref(database), `/nameChange/`))
+  ).val();
+  updates[`/nameChange/`] = !nameChange;
+  const updateVal = await update(ref(database), updates);
+
+  return updateVal;
+};
+
+const DeleteGroup = async (groupKey) => {
   await remove(ref(database, `/groups/${groupKey}`));
-  await remove(ref(database, `/users/${uid}/groups/${groupKey}`));
+  await remove(
+    ref(database, `/users/${auth.currentUser.uid}/groups/${groupKey}`)
+  );
 };
 
 export {
@@ -75,10 +96,12 @@ export {
   CreateUserInDatabase,
   CreateGroup,
   GetGroupName,
+  UpdateGroupName,
   ref,
   set,
   get,
   child,
   onChildAdded,
   DeleteGroup,
+  GetAdmin,
 };

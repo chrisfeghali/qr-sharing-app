@@ -74,7 +74,6 @@ export function AuthProvider({ children }) {
         setEmail(user.email);
       }
       setLoading(false);
-      console.log(user);
     });
 
     return () => unsubscribe();

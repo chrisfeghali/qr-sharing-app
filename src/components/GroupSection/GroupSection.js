@@ -1,18 +1,24 @@
 import { useState, useEffect } from "react";
-import { CreateGroup, GetGroupName, database, ref } from "../../apis/firebase";
+import {
+  CreateGroup,
+  GetGroupName,
+  database,
+  ref,
+  GetAdmin,
+} from "../../apis/firebase";
 import { useAuth } from "../../contexts/AuthContext";
-import { useListKeys } from "react-firebase-hooks/database";
+import { useListKeys, useObjectVal } from "react-firebase-hooks/database";
 import Button from "react-bootstrap/Button";
+import CollapsibleButton from "../CollapsibleButton/CollapsibleButton";
 import { LinkContainer } from "react-router-bootstrap";
 
-const GroupSection = () => {
+const GroupSection = (...props) => {
   const { currentUser } = useAuth();
   const [groups, setGroups] = useState([]);
 
   const submitForm = async (e) => {
     e.preventDefault();
-    e.target[0].value &&
-      (await CreateGroup(currentUser.uid, e.target[0].value));
+    e.target[0].value && (await CreateGroup(e.target[0].value));
     e.target.reset();
   };
 
@@ -20,13 +26,16 @@ const GroupSection = () => {
     ref(database, `users/${currentUser.uid}/groups/`)
   );
 
+  const [nameChangeVal, ,] = useObjectVal(ref(database, `nameChange`));
+
   useEffect(() => {
-    const fetchGroupNames = async () => {
+    const FetchGroupNames = async () => {
       try {
         let groupNames = [];
         for (const [, value] of Object.entries(keys)) {
           const groupName = await GetGroupName(value);
-          groupNames = [...groupNames, { value, groupName }];
+          const admin = await GetAdmin(value);
+          groupNames = [...groupNames, { value, groupName, admin }];
         }
         return setGroups(groupNames);
       } catch (error) {
@@ -34,16 +43,40 @@ const GroupSection = () => {
       }
     };
 
-    fetchGroupNames();
-  }, [keys]);
+    FetchGroupNames();
+  }, [keys, nameChangeVal]);
 
   return (
     <>
       {groups.map((v) => {
         return (
-          <LinkContainer key={v.value} to={`group/${v.value}`}>
-            <Button>{v.groupName}</Button>
-          </LinkContainer>
+          <CollapsibleButton
+            key={v.value}
+            buttonName={v.groupName}
+            startOpen={false}
+            conditionalStatement="open === false"
+            buttonLink={`group/${v.value}`}
+            buttonSrc={(props) => <Button {...props}></Button>}
+          >
+            <LinkContainer to={`group/${v.value}/codes`}>
+              <Button className="final">Codes</Button>
+            </LinkContainer>
+            <LinkContainer to={`group/${v.value}/members`}>
+              <Button className="final">Members</Button>
+            </LinkContainer>
+            {v.admin ? (
+              <>
+                <LinkContainer to={`group/${v.value}/invites`}>
+                  <Button className="final">Invites</Button>
+                </LinkContainer>
+                <LinkContainer to={`group/${v.value}/edit-group`}>
+                  <Button className="final">Edit Group</Button>
+                </LinkContainer>
+              </>
+            ) : (
+              <></>
+            )}
+          </CollapsibleButton>
         );
       })}
 

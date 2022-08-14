@@ -1,9 +1,15 @@
 .collapsible-button-parent,
 .collapsible-button-parent .collapsing,
 .collapsible-button-parent .show {
-  border-bottom: 1px solid var(--bs-primary);
   display: flex;
   flex-direction: column;
+}
+
+.collapsible-border-bottom,
+.collapsible-border-bottom > div > .collapsing,
+.collapsible-border-bottom > div > .show
+{
+  border-bottom: 1px solid var(--bs-primary);
 }
 
 .collapsible-button-parent .collapsible-button::before {
@@ -32,15 +38,17 @@
 .collapsible-button:focus,
 .collapsible-button:active,
 .collapsible-button:active:focus,
-.collapsible-children > *:focus,
-.collapsible-children > *:active,
-.collapsible-children > *:active:focus {
+.collapsible-children > .final:focus,
+.collapsible-children > .final:active,
+.collapsible-children > .final:active:focus {
   outline: 1px solid var(--bs-primary);
   box-shadow: none;
 }
 
+
 .collapsible-button:hover,
-.collapsible-button-parent .collapsible-children > *:hover {
+.collapsible-children > .final:hover
+{
   background-color: var(--bs-primary);
 }
 
@@ -56,4 +64,10 @@
   width: 100%;
   border-radius: 0;
   white-space: nowrap;
+}
+
+.collapsible-button-div,
+.collapsible-button-parent > .collapsible-button
+{
+  width: 100%
 }
