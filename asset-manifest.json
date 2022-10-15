@@ -1,21 +1,14 @@
 {
   "files": {
-    "main.css": "/qr-sharing-app/static/css/main.18ced093.chunk.css",
-    "main.js": "/qr-sharing-app/static/js/main.c9820289.chunk.js",
-    "main.js.map": "/qr-sharing-app/static/js/main.c9820289.chunk.js.map",
-    "runtime-main.js": "/qr-sharing-app/static/js/runtime-main.c19097d0.js",
-    "runtime-main.js.map": "/qr-sharing-app/static/js/runtime-main.c19097d0.js.map",
-    "static/js/2.1f6c560e.chunk.js": "/qr-sharing-app/static/js/2.1f6c560e.chunk.js",
-    "static/js/2.1f6c560e.chunk.js.map": "/qr-sharing-app/static/js/2.1f6c560e.chunk.js.map",
+    "main.css": "/qr-sharing-app/static/css/main.e39e8520.css",
+    "main.js": "/qr-sharing-app/static/js/main.7c3eb39e.js",
+    "static/media/logo.svg": "/qr-sharing-app/static/media/logo.0aec91560fded3acabbb8c4c37e25ebd.svg",
     "index.html": "/qr-sharing-app/index.html",
-    "static/css/main.18ced093.chunk.css.map": "/qr-sharing-app/static/css/main.18ced093.chunk.css.map",
-    "static/js/2.1f6c560e.chunk.js.LICENSE.txt": "/qr-sharing-app/static/js/2.1f6c560e.chunk.js.LICENSE.txt",
-    "static/media/logo.0aec9156.svg": "/qr-sharing-app/static/media/logo.0aec9156.svg"
+    "main.e39e8520.css.map": "/qr-sharing-app/static/css/main.e39e8520.css.map",
+    "main.7c3eb39e.js.map": "/qr-sharing-app/static/js/main.7c3eb39e.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.c19097d0.js",
-    "static/js/2.1f6c560e.chunk.js",
-    "static/css/main.18ced093.chunk.css",
-    "static/js/main.c9820289.chunk.js"
+    "static/css/main.e39e8520.css",
+    "static/js/main.7c3eb39e.js"
   ]
 }
