@@ -6,6 +6,9 @@ const InputField = ({
   register,
   required,
   type,
+  min,
+  max,
+  step,
   errors,
   maxLength = 50,
   minLength = 0,
@@ -42,6 +45,9 @@ const InputField = ({
           validate: validate,
         })}
         type={type}
+        min={min}
+        max={max}
+        step={step}
         placeholder={label}
         isInvalid={errors[label] && errors[label].type !== "success"}
         isValid={errors[label] && errors[label].type === "success"}

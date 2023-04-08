@@ -145,7 +145,6 @@ const ProfilePage = () => {
               register={register}
               type="text"
               errors={errors}
-              className=" w-50"
             />
             <InputField
               label="Confirm New Name"
@@ -157,7 +156,6 @@ const ProfilePage = () => {
                 value === watch("New Name") || "Names do not match."
               }
               errors={errors}
-              className=" w-50"
             />
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
@@ -167,7 +165,6 @@ const ProfilePage = () => {
               type="email"
               errors={errors}
               pattern={/^\S+@\S+$/i}
-              className=" w-50"
             />
             <InputField
               label="Confirm New Email Address"
@@ -179,7 +176,6 @@ const ProfilePage = () => {
                 value === watch("New Email Address") || "Emails do not match."
               }
               errors={errors}
-              className=" w-50"
             />
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
@@ -189,7 +185,6 @@ const ProfilePage = () => {
               type="password"
               errors={errors}
               minLength="6"
-              className=" w-50"
             />
 
             <InputField
@@ -202,7 +197,6 @@ const ProfilePage = () => {
               validate={(value) =>
                 value === watch("New Password") || "Passwords do not match."
               }
-              className=" w-50"
             />
           </div>
           <div className="Sign-password-bottom mt-2  ">

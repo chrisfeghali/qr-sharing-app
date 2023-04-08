@@ -41,7 +41,9 @@ const SideBar = () => {
               Edit Profile
             </Button>
           </LinkContainer>
-          <Button className="final">My Codes</Button>
+          <LinkContainer to="/home/my-codes">
+            <Button className="sidebar-button final">My Codes</Button>
+          </LinkContainer>
         </CollapsibleButton>
         <div className="empty-space"></div>
       </CollapsibleBar>

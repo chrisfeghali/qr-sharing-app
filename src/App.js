@@ -13,10 +13,12 @@ import RequireNonAuth from "./components/RequireNonAuth";
 import RequireAdmin from "./components/RequireAdmin";
 import HomePage from "./components/HomePage/HomePage";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import MyCodesPage from "./components/MyCodesPage/MyCodesPage";
 import CodePage from "./components/CodePage/CodePage";
 import MemberPage from "./components/MemberPage/MemberPage";
 import InvitePage from "./components/InvitePage/InvitePage";
 import EditGroupPage from "./components/EditGroupPage/EditGroupPage";
+import JoinGroup from "./components/JoinGroup/JoinGroup";
 import { GroupProvider } from "./contexts/GroupContext";
 
 function App(props) {
@@ -25,6 +27,7 @@ function App(props) {
       <AuthProvider>
         <Routes>
           <Route index element={<Navigate replace to="home" />} />
+          <Route path="join/:joinCode" element={<JoinGroup />} />
           <Route
             path="home"
             element={
@@ -36,6 +39,7 @@ function App(props) {
             <Route index element={<Navigate replace to="homepage" />} />
             <Route path="homepage" element={<HomePage />} />
             <Route path="edit-profile" element={<ProfilePage />} />
+            <Route path="my-codes" element={<MyCodesPage />} />
             <Route path="group/:groupID">
               <Route index element={<Navigate replace to="codes" />} />
               <Route

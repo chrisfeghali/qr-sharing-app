@@ -4,7 +4,7 @@ import {
   GetGroupName,
   database,
   ref,
-  GetAdmin,
+  GetGroupAdmin,
 } from "../../apis/firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import { useListKeys, useObjectVal } from "react-firebase-hooks/database";
@@ -15,6 +15,7 @@ import { LinkContainer } from "react-router-bootstrap";
 const GroupSection = (...props) => {
   const { currentUser } = useAuth();
   const [groups, setGroups] = useState([]);
+  const [isMounted, setIsMounted] = useState(true);
 
   const submitForm = async (e) => {
     e.preventDefault();
@@ -22,11 +23,9 @@ const GroupSection = (...props) => {
     e.target.reset();
   };
 
-  const [keys, ,] = useListKeys(
-    ref(database, `users/${currentUser.uid}/groups/`)
-  );
+  const [keys] = useListKeys(ref(database, `users/${currentUser.uid}/groups/`));
 
-  const [nameChangeVal, ,] = useObjectVal(ref(database, `nameChange`));
+  const [nameChangeVal] = useObjectVal(ref(database, `nameChange`));
 
   useEffect(() => {
     const FetchGroupNames = async () => {
@@ -34,17 +33,23 @@ const GroupSection = (...props) => {
         let groupNames = [];
         for (const [, value] of Object.entries(keys)) {
           const groupName = await GetGroupName(value);
-          const admin = await GetAdmin(value);
+          const admin = await GetGroupAdmin(value);
           groupNames = [...groupNames, { value, groupName, admin }];
         }
-        return setGroups(groupNames);
+        if (isMounted) {
+          setGroups(groupNames);
+        }
       } catch (error) {
         console.log(error);
       }
     };
-
+    setIsMounted(true);
     FetchGroupNames();
-  }, [keys, nameChangeVal]);
+
+    return () => {
+      setIsMounted(false);
+    };
+  }, [keys, nameChangeVal, isMounted]);
 
   return (
     <>

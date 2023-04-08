@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { GetAdmin, GetGroupName, UpdateGroupName } from "../apis/firebase";
+import { GetGroupAdmin, GetGroupName, UpdateGroupName } from "../apis/firebase";
 import { useLocation } from "react-router-dom";
 
 const GroupContext = React.createContext();
@@ -30,7 +30,7 @@ export function GroupProvider({ children, ...props }) {
   useEffect(() => {
     const getValues = async (groupValue) => {
       try {
-        const adminResult = await GetAdmin(groupValue);
+        const adminResult = await GetGroupAdmin(groupValue);
         setAdmin(adminResult);
         const groupNameResult = await GetGroupName(groupValue);
         setGroupName(groupNameResult);

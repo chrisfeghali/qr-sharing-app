@@ -1,9 +1,8 @@
-import Button from "react-bootstrap/Button";
 import { useGroup } from "../../contexts/GroupContext";
-import { DeleteGroup } from "../../apis/firebase";
+import AddCodeButton from "../AddCodeButton/AddCodeButton";
 
 const CodePage = () => {
-  const { groupName, groupValue } = useGroup();
+  const { groupName } = useGroup();
 
   return (
     <>
@@ -14,18 +13,7 @@ const CodePage = () => {
         </div>
       </div>
       <div className="Sign-header-links">
-        <Button
-          onClick={async () => {
-            try {
-              await DeleteGroup(groupValue);
-              // navigate("/home/homepage", { replace: true });
-            } catch (error) {
-              console.log(error);
-            }
-          }}
-        >
-          Remove Group
-        </Button>
+        <AddCodeButton />
       </div>
     </>
   );

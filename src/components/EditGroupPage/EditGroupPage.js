@@ -3,9 +3,13 @@ import { useForm } from "react-hook-form";
 import InputField from "../inputfield/InputField";
 import Form from "react-bootstrap/Form";
 import { useGroup } from "../../contexts/GroupContext";
+import { DeleteGroup } from "../../apis/firebase";
+import { useNavigate, useParams } from "react-router-dom";
 
 const EditGroupPage = () => {
   const { groupName, updateGroupName, setGroupName } = useGroup();
+  const params = useParams();
+  const navigate = useNavigate();
 
   async function handleUpdateGroupName(name) {
     try {
@@ -44,6 +48,18 @@ const EditGroupPage = () => {
         <div className="Sign-header">
           <span className="fs-3 mb-2">Edit Group - {groupName}</span>
         </div>
+        <Button
+          onClick={async () => {
+            try {
+              await DeleteGroup(params.groupID);
+              navigate("/home/homepage", { replace: true });
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+        >
+          Remove Group
+        </Button>
         <Form
           className="Sign-form "
           noValidate

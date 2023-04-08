@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../apis/firebase";
+import { auth, AddUserToGroup } from "../apis/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -25,6 +25,7 @@ export function AuthProvider({ children }) {
   const [userName, setUserName] = useState();
   const [email, setEmail] = useState();
   const [loading, setLoading] = useState(true);
+  const [joinCode, setJoinCode] = useState();
 
   function signUp(email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -72,12 +73,19 @@ export function AuthProvider({ children }) {
       if (user) {
         setUserName(user.displayName);
         setEmail(user.email);
+        if (joinCode) {
+          try {
+            AddUserToGroup(joinCode);
+          } catch (err) {
+            console.log(err.code);
+          }
+        }
       }
       setLoading(false);
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [joinCode]);
 
   const value = {
     currentUser,
@@ -93,6 +101,8 @@ export function AuthProvider({ children }) {
     updateEmail,
     updatePassword,
     updateName,
+    joinCode,
+    setJoinCode,
   };
 
   return (

@@ -20,3 +20,10 @@
 .Link:focus {
   box-shadow: none;
 }
+
+@media print {
+  html,
+  body {
+     display: none;
+  }
+}

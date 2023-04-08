@@ -1,35 +1,37 @@
-import Button from "react-bootstrap/Button";
+import { Button } from "react-bootstrap";
 import { useGroup } from "../../contexts/GroupContext";
-import { useParams } from "react-router-dom";
-import { DeleteGroup } from "../../apis/firebase";
-import { useNavigate } from "react-router-dom";
+import { CreateInviteCode } from "../../apis/firebase";
+
+import InviteSection from "../InviteSection/InviteSection";
 
 const InvitePage = () => {
-  const { groupName } = useGroup();
-  const params = useParams();
-  const navigate = useNavigate();
+  const { groupName, groupValue } = useGroup();
+
+  const generateInviteURL = async () => {
+    try {
+      await CreateInviteCode(groupValue);
+    } catch (err) {
+      console.log(err.code);
+    }
+  };
 
   return (
     <>
-      <div>Invites</div>
       <div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div>{groupName}</div>
-        </div>
-      </div>
-      <div className="Sign-header-links">
-        <Button
-          onClick={async () => {
-            try {
-              await DeleteGroup(params.groupID);
-              navigate("/home/homepage", { replace: true });
-            } catch (error) {
-              console.log(error);
-            }
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-evenly",
           }}
         >
-          Remove Group
-        </Button>
+          <div>{groupName}</div>
+          <div>Invites</div>
+        </div>
+        <div style={{ textAlign: "center" }}>
+          <Button onClick={generateInviteURL}>Create Invite Code</Button>
+          <InviteSection></InviteSection>
+        </div>
       </div>
     </>
   );
