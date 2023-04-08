@@ -187,6 +187,7 @@ const AddUserToGroup = async (joinCode) => {
     await update(ref(database), updates);
     updates = {};
     updates[`/groups/${groupKey}/members/${auth.currentUser.uid}`] = false;
+    updates[`/groups/${groupKey}/invites/${joinCode}`] = null;
     updates[`/invites/${joinCode}`] = null;
     const updateVal = await update(ref(database), updates);
     return updateVal;
