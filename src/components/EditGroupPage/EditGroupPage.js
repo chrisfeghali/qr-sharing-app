@@ -7,9 +7,13 @@ import { DeleteGroup } from "../../apis/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditGroupPage = () => {
-  const { updateGroupName } = useGroup();
+  const { updateGroupName, updateReservationTime } = useGroup();
   const params = useParams();
   const navigate = useNavigate();
+
+  const handleUpdateReservationTime = async (reservationTime) => {
+    await updateReservationTime(reservationTime);
+  };
 
   async function handleUpdateGroupName(name) {
     try {
@@ -32,12 +36,15 @@ const EditGroupPage = () => {
     setError,
     setValue,
   } = useForm({
-    mode: "onBlur", // "onChange"
+    mode: "all", // "onChange"
   });
 
   const onSubmit = async (data) => {
     if (data["New Name"]) {
       await handleUpdateGroupName(data["New Name"]);
+    }
+    if (data["Reservation Time"]) {
+      await handleUpdateReservationTime(+data["Reservation Time"]);
     }
   };
 
@@ -64,6 +71,20 @@ const EditGroupPage = () => {
               required={watch("New Name") === "" ? false : true}
               validate={(value) =>
                 value === watch("New Name") || "Names do not match."
+              }
+              errors={errors}
+            />
+          </div>
+          <div className="update-form">
+            <InputField
+              label="Reservation Time"
+              register={register}
+              type="number"
+              step={5}
+              min={5}
+              max={60}
+              validate={(value) =>
+                value % 5 === 0 || "Must be a multiple of 5."
               }
               errors={errors}
             />

@@ -729,6 +729,12 @@ const AlignUserAdminSettings = async (groupKey, adminGroup) => {
   }
 };
 
+const UpdateReservationTime = async (groupKey, reservationTime) => {
+  const updates = {};
+  updates[`/groups/${groupKey}/reserveTime`] = reservationTime;
+  await update(ref(database), updates);
+};
+
 export {
   auth,
   app,
@@ -781,4 +787,5 @@ export {
   UnMakeAdmin,
   AlignUserAdminSettings,
   LeaveGroup,
+  UpdateReservationTime,
 };
