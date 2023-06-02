@@ -157,6 +157,8 @@ const Slider = ({
                     style={{
                       cursor: "grab",
                       position: "absolute",
+                      top: `${thumbHeight / 2}px`,
+                      left: "0px",
                     }}
                   >
                     <div
@@ -168,7 +170,7 @@ const Slider = ({
                         strokeLinejoin: "round",
                         strokeLinecap: "round",
                         rotate: "90deg",
-                        transform: "translate(-40%, 145%)",
+                        transform: "translate(-50%, 100%)",
                         fill: "var(--bs-primary)",
                       }}
                     >
@@ -180,7 +182,7 @@ const Slider = ({
                       style={{
                         zIndex: "2",
                         position: "absolute",
-                        transform: "translate(-270%, -30%)",
+                        transform: "translate(-190%, -50%)",
                         cursor: "grab",
                       }}
                     >
@@ -227,7 +229,7 @@ const Slider = ({
           <Button
             style={{
               position: "absolute",
-              width: "150%",
+              width: "130%",
               left: "-15%",
               marginTop: "10px",
             }}
