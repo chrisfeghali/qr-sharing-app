@@ -55,7 +55,7 @@ function ResetPassword() {
           );
           break;
         default:
-          console.log(error.message);
+          //console.log(error.message);
           break;
       }
     }

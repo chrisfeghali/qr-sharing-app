@@ -1,5 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
-import { auth, AddUserToGroup } from "../apis/firebase";
+import {
+  auth,
+  AddUserToGroup,
+  UpdateUserName,
+  UpdateEmail,
+} from "../apis/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -48,7 +53,9 @@ export function AuthProvider({ children }) {
   }
 
   function updateEmail(email) {
-    return authUpdateEmail(currentUser, email);
+    const result = authUpdateEmail(currentUser, email);
+    UpdateEmail(email);
+    return result;
   }
 
   function updatePassword(password) {
@@ -56,7 +63,9 @@ export function AuthProvider({ children }) {
   }
 
   function updateName(userName) {
-    return authUpdateProfile(currentUser, { displayName: userName });
+    const result = authUpdateProfile(currentUser, { displayName: userName });
+    UpdateUserName(userName);
+    return result;
   }
 
   async function signUpAndUpdateName(email, password, userName) {
@@ -77,7 +86,7 @@ export function AuthProvider({ children }) {
           try {
             AddUserToGroup(joinCode);
           } catch (err) {
-            console.log(err.code);
+            //console.log(err.code);
           }
         }
       }

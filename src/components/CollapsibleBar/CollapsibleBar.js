@@ -1,22 +1,31 @@
 import "./CollapsibleBar.css";
-import { useState } from "react";
+import { useCallback, useMemo } from "react";
 import Collapse from "react-bootstrap/Collapse";
+import { useSidebar } from "../../contexts/SidebarContext";
 
 const CollapsibleBar = ({ startOpen, buttonName, children, ...props }) => {
-  const [open, setOpen] = useState(startOpen);
+  const { open, setOpen } = useSidebar();
   const ButtonSrc = props.buttonSrc;
+  const handleButtonClick = useCallback(() => {
+    setOpen((prevOpen) => !prevOpen);
+  }, [setOpen]);
 
-  return (
-    <div className="collapsible-bar">
+  const buttonMemoed = useMemo(() => {
+    return (
       <ButtonSrc
         className="collapsible-bar-button"
-        onClick={() => setOpen(!open)}
+        onClick={handleButtonClick}
         role="button"
         aria-controls="example-collapse-text"
-        aria-expanded={open}
       >
         {buttonName}
       </ButtonSrc>
+    );
+  }, [buttonName, handleButtonClick]);
+
+  return (
+    <div className="collapsible-bar">
+      {buttonMemoed}
 
       <div
         className="collapsible-bar-content"

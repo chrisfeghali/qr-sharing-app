@@ -1,0 +1,32 @@
+.vertical-slider {
+  height: inherit;
+  width: 100px;
+  border: 2px solid var(--bs-primary);
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  border-radius: 1px;
+  overscroll-behavior: none;
+}
+
+.slider-thumb {
+  font-size: 0.9em;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.slider-thumb:focus-visible {
+  outline: none;
+}
+
+.slider-mark{
+  width: 140%;
+  margin-left: 40%;
+  height: 1px;
+  /* border: 1px solid #000; */
+  background-color: var(--bs-primary);
+  cursor: pointer;
+  border-radius: 1%;
+  vertical-align: middle;
+}

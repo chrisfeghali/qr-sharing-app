@@ -29,7 +29,7 @@ function Signup() {
       );
       setUserName(data["Name"]);
       const user = signUpResult.user;
-      await CreateUserInDatabase(user.uid, data["Name"]);
+      await CreateUserInDatabase(user.uid, data["Name"], data["Email Address"]);
     } catch (error) {
       switch (error.code) {
         //errors after returning from auth server, shouldn't hit any of these except for email-alrady-in-use
@@ -67,7 +67,7 @@ function Signup() {
           );
           break;
         default:
-          console.log(error.message);
+          //console.log(error.message);
           break;
       }
     }

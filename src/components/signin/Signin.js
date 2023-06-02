@@ -21,7 +21,7 @@ function Signin(props) {
     mode: "onBlur", // "onChange"
   });
   const { signIn, signInPopup } = useAuth();
-  const [show, setShow] = useState(false);
+  const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const onSubmit = async (data) => {
     try {
@@ -53,7 +53,7 @@ function Signin(props) {
           );
           break;
         default:
-          console.log(error.message);
+          //console.log(error.message);
           alert(error.message, "Error during sign in, please contact me");
           break;
       }
@@ -68,10 +68,11 @@ function Signin(props) {
         try {
           await CreateUserInDatabase(
             signInResult.user.uid,
-            signInResult.user.displayName
+            signInResult.user.displayName,
+            signInResult.user.email
           );
         } catch (error) {
-          console.log(error);
+          //console.log(error);
         }
       }
     } catch (error) {
@@ -113,7 +114,7 @@ function Signin(props) {
         default:
           setErrorMessage(error.code);
       }
-      setShow(true);
+      setShowError(true);
     }
   };
 
@@ -163,11 +164,12 @@ function Signin(props) {
         <span className="fs-3">OR</span>
         <GoogleButton onClick={googleSignIn}>Sign in with Google</GoogleButton>
         <Alert
-          className="position-absolute top-100 start-50 translate-middle"
+          className="position-absolute top-25"
           variant="danger"
-          show={show}
+          show={showError}
+          style={{ zIndex: 1 }}
           onClose={() => {
-            setShow(false);
+            setShowError(false);
           }}
           dismissible
         >

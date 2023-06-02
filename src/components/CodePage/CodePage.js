@@ -1,19 +1,29 @@
 import { useGroup } from "../../contexts/GroupContext";
 import AddCodeButton from "../AddCodeButton/AddCodeButton";
+import BookingComponent from "../BookingComponent/BookingComponent";
+import RemoveCodeButton from "../RemoveCodeButton/RemoveCodeButton";
+import ReserveCode from "../ReserveCode/ReserveCode";
 
 const CodePage = () => {
-  const { groupName } = useGroup();
+  const { groupValue } = useGroup();
 
   return (
     <>
-      <div>Codes</div>
-      <div>
-        <div style={{ display: "flex", flexDirection: "column" }}>
-          <div>{groupName}</div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <AddCodeButton />
+          <RemoveCodeButton />
         </div>
-      </div>
-      <div className="Sign-header-links">
-        <AddCodeButton />
+        <div>
+          <ReserveCode groupValue={groupValue} />
+        </div>
+        <BookingComponent />
       </div>
     </>
   );

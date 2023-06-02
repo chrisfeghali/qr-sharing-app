@@ -1,9 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
-import { Alert, Form, Button, Modal } from "react-bootstrap";
+import Alert from "react-bootstrap/Alert";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import InputField from "../inputfield/InputField";
 import QRCode from "../QRCode/QRCode";
 import { useForm } from "react-hook-form";
-import { CreateCode } from "../../apis/firebase";
+import { CreateCode, GetCurrentTime } from "../../apis/firebase";
 
 const AddQRModal = ({ text, show, onShowChange }) => {
   const {
@@ -21,8 +24,6 @@ const AddQRModal = ({ text, show, onShowChange }) => {
       Name: "",
       "Uses per day": 5,
       "Uses left today": 5,
-      "Minutes between uses": 30,
-      "Reservation Time (minutes)": 10,
     },
   });
 
@@ -43,15 +44,13 @@ const AddQRModal = ({ text, show, onShowChange }) => {
     const code = {
       val: text,
       name: data["Name"],
-      usesPerDay: data["Uses per day"],
-      usesLeft: data["Uses left today"],
-      minutesBetweenUses: data["Minutes between uses"],
-      reservationTime: data["Reservation Time (minutes)"],
+      usesPerDay: +data["Uses per day"],
       groups: [null],
       writable: {
         reserved: false,
-        lastUsed: 0,
-        usesLeft: 5,
+        lastUsed: await GetCurrentTime(),
+        usesLeft: +data["Uses left today"],
+        strikes: 0,
       },
     };
     try {
@@ -64,6 +63,7 @@ const AddQRModal = ({ text, show, onShowChange }) => {
         );
       } else {
         setErrorMessage(`Error adding code. Reason: ${err.code}`);
+        console.error(err);
       }
       handleClose();
       setShowError(true);
@@ -114,26 +114,6 @@ const AddQRModal = ({ text, show, onShowChange }) => {
               required={true}
               errors={errors}
             />
-            <InputField
-              label="Minutes between uses"
-              register={register}
-              type="number"
-              step={1}
-              min={0}
-              max={1500}
-              required={true}
-              errors={errors}
-            />
-            <InputField
-              label="Reservation Time (minutes)"
-              register={register}
-              type="number"
-              step={1}
-              min={1}
-              max={1500}
-              required={true}
-              errors={errors}
-            />
             <Button style={{ display: "none" }} type="submit">
               Add code
             </Button>
@@ -149,9 +129,10 @@ const AddQRModal = ({ text, show, onShowChange }) => {
         </Modal.Footer>
       </Modal>
       <Alert
-        className="position-absolute top-25 start-50 translate-middle"
+        className="position-absolute top-25"
         variant="danger"
         show={showError}
+        style={{ zIndex: 1 }}
         onClose={() => {
           setShowError(false);
         }}

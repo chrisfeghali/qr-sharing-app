@@ -1,16 +1,24 @@
 import { useState, useEffect } from "react";
-import { Card, Modal, Form, Button, Alert } from "react-bootstrap";
-import { database, ref } from "../../apis/firebase";
+import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Alert from "react-bootstrap/Alert";
+import {
+  GetCurrentTime,
+  database,
+  ref,
+  ResetStrikes,
+} from "../../apis/firebase";
 import { useObjectVal } from "react-firebase-hooks/database";
 import QRCode from "../QRCode/QRCode";
 import { useForm } from "react-hook-form";
 import InputField from "../inputfield/InputField";
-import { UpdateCode, DeleteCode } from "../../apis/firebase";
+import { UpdateCode, DeleteCode, CleanCode } from "../../apis/firebase";
 
 const CodeTile = ({ codeKey, ...props }) => {
-  const [code, loading, error] = useObjectVal(
-    ref(database, `codes/${codeKey}`)
-  );
+  const [code] = useObjectVal(ref(database, `codes/${codeKey}`));
+  const [strikes, setStrikes] = useState(0);
   const [showModal, setShowModal] = useState(false);
   const handleCardClick = () => {
     setShowModal(!showModal);
@@ -44,33 +52,39 @@ const CodeTile = ({ codeKey, ...props }) => {
   };
 
   useEffect(() => {
-    if (!loading && !!code) {
-      setValue("Name", code.name);
-      setValue("Uses per day", code.usesPerDay);
-      setValue("Uses left today", code.usesLeft);
-      setValue("Minutes between uses", code.minutesBetweenUses);
-      setValue("Reservation Time (minutes)", code.reservationTime);
+    const runCleanCode = async () => {
+      await CleanCode(codeKey);
+    };
+
+    if (!code) {
+      return;
     }
-  }, [loading, error, code, setValue]);
+
+    setValue("Name", code.name);
+    setValue("Uses per day", code.usesPerDay);
+    setValue("Uses left today", code.usesLeft);
+    setStrikes(code?.writable?.strikes);
+    runCleanCode();
+  }, [code, codeKey, setValue]);
 
   const onSubmit = async (data) => {
     const updatedCode = {
       name: data["Name"],
-      usesPerDay: data["Uses per day"],
-      usesLeft: data["Uses left today"],
-      minutesBetweenUses: data["Minutes between uses"],
-      reservationTime: data["Reservation Time (minutes)"],
+      usesPerDay: +data["Uses per day"],
       groups: [null],
       writable: {
         reserved: false,
-        lastUsed: 0,
-        usesLeft: 5,
+        lastUsed: await GetCurrentTime(),
+        usesLeft: +data["Uses left today"],
+        strikes: strikes,
       },
     };
     try {
       await UpdateCode(codeKey, updatedCode);
+      //console.log(updatedCode);
       handleClose();
     } catch (err) {
+      //console.log(err);
       setErrorMessage(`Error adding code. Reason: ${err.code}`);
       handleClose();
       setShowError(true);
@@ -82,10 +96,11 @@ const CodeTile = ({ codeKey, ...props }) => {
   }
   return (
     <>
-      {!loading && !error && code !== null && (
+      {!!code && (
         <>
           <Card
             style={{
+              margin: "0 auto",
               width: "15rem",
               cursor: "pointer",
             }}
@@ -112,6 +127,15 @@ const CodeTile = ({ codeKey, ...props }) => {
                 onSubmit={handleSubmit(onSubmit)}
               >
                 <QRCode text={code.val} />
+                {!!strikes && (
+                  <Button
+                    onClick={async () => {
+                      await ResetStrikes(codeKey);
+                    }}
+                  >
+                    Reset Strikes ({strikes})
+                  </Button>
+                )}
                 <InputField
                   label="Name"
                   register={register}
@@ -139,26 +163,6 @@ const CodeTile = ({ codeKey, ...props }) => {
                   required={true}
                   errors={errors}
                 />
-                <InputField
-                  label="Minutes between uses"
-                  register={register}
-                  type="number"
-                  step={1}
-                  min={0}
-                  max={1500}
-                  required={true}
-                  errors={errors}
-                />
-                <InputField
-                  label="Reservation Time (minutes)"
-                  register={register}
-                  type="number"
-                  step={1}
-                  min={1}
-                  max={1500}
-                  required={true}
-                  errors={errors}
-                />
                 <Button style={{ display: "none" }} type="submit">
                   Update Code
                 </Button>
@@ -177,9 +181,10 @@ const CodeTile = ({ codeKey, ...props }) => {
             </Modal.Footer>
           </Modal>
           <Alert
-            className="position-absolute top-25 start-50 translate-middle"
+            className="position-absolute top-25"
             variant="danger"
             show={showError}
+            style={{ zIndex: 1 }}
             onClose={() => {
               setShowError(false);
             }}

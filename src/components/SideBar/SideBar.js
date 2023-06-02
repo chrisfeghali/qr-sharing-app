@@ -5,10 +5,17 @@ import logo from "../../logo.svg";
 import CollapsibleButton from "../CollapsibleButton/CollapsibleButton";
 import GroupSection from "../GroupSection/GroupSection";
 import { LinkContainer } from "react-router-bootstrap";
+import ProfileSection from "../ProfileSection/ProfileSection";
 import { useAuth } from "../../contexts/AuthContext";
+import { useSidebar } from "../../contexts/SidebarContext";
 
 const SideBar = () => {
-  const { userName, email } = useAuth();
+  const { signOut } = useAuth();
+  const handleLogout = async () => {
+    await signOut();
+  };
+
+  const { setOpen } = useSidebar();
 
   return (
     <div className="sidebar">
@@ -18,7 +25,14 @@ const SideBar = () => {
       >
         <div className="empty-space"></div>
         <LinkContainer to="/home/homepage">
-          <Button className="sidebar-button sidebar-border-top">Home</Button>
+          <Button
+            className="sidebar-button sidebar-border-top"
+            onClick={() => {
+              setOpen(false);
+            }}
+          >
+            Home
+          </Button>
         </LinkContainer>
         <CollapsibleButton
           parentClassName="collapsible-border-bottom"
@@ -26,7 +40,7 @@ const SideBar = () => {
           startOpen={true}
           buttonSrc={(props) => <Button {...props}></Button>}
         >
-          <GroupSection></GroupSection>
+          <GroupSection />
         </CollapsibleButton>
         <CollapsibleButton
           parentClassName="collapsible-border-bottom"
@@ -34,16 +48,33 @@ const SideBar = () => {
           startOpen={false}
           buttonSrc={(props) => <Button {...props}></Button>}
         >
-          <div className="h5 final">{userName}</div>
-          <div className="h5 final">{email}</div>
+          <ProfileSection />
+          <LinkContainer to="/home/my-codes">
+            <Button
+              className="sidebar-button final"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
+              My Codes
+            </Button>
+          </LinkContainer>
           <LinkContainer to="/home/edit-profile">
-            <Button className="sidebar-button sidebar-border-top final">
+            <Button
+              className="sidebar-button sidebar-border-top final"
+              onClick={() => {
+                setOpen(false);
+              }}
+            >
               Edit Profile
             </Button>
           </LinkContainer>
-          <LinkContainer to="/home/my-codes">
-            <Button className="sidebar-button final">My Codes</Button>
-          </LinkContainer>
+          <Button
+            className="sidebar-button sidebar-border-top final"
+            onClick={handleLogout}
+          >
+            Sign Out
+          </Button>
         </CollapsibleButton>
         <div className="empty-space"></div>
       </CollapsibleBar>

@@ -37,7 +37,6 @@ const MyCodesPage = () => {
             justifyContent: "space-evenly",
           }}
         >
-          <div>My Codes</div>
           <div>
             <input
               id="qrInputFile"
@@ -47,13 +46,16 @@ const MyCodesPage = () => {
               style={{ display: "none" }}
               onChange={AddCode}
             />
-            <Button onClick={() => qrInput.current.click()}>Add code</Button>
+            <Button className="mb-2" onClick={() => qrInput.current.click()}>
+              Add code
+            </Button>
           </div>
           <AddQRModal show={show} onShowChange={setShow} text={qr} />
           <Alert
-            className="position-absolute top-25 start-50 translate-middle"
+            className="position-absolute top-25"
             variant="danger"
             show={showError}
+            style={{ zIndex: 1 }}
             onClose={() => {
               setShowError(false);
             }}
@@ -62,7 +64,10 @@ const MyCodesPage = () => {
             <Alert.Heading>{errorMessage}</Alert.Heading>
           </Alert>
         </div>
-        <CodeSection codeObject={(props) => <CodeTile {...props}></CodeTile>} />
+        <CodeSection
+          emptyMessage={`No codes added`}
+          codeObject={(props) => <CodeTile {...props}></CodeTile>}
+        />
       </div>
     </>
   );

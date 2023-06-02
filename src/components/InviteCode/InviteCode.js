@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
-import { useGroup } from "../../contexts/GroupContext";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import { DeleteInviteCode } from "../../apis/firebase";
+import { useGroup } from "../../contexts/GroupContext";
 
 const InviteCode = ({ inviteKey, inviteVal }) => {
   const location = useLocation();
@@ -15,12 +19,11 @@ const InviteCode = ({ inviteKey, inviteVal }) => {
     navigator.clipboard.writeText(inviteUrl);
     setButtonText("Copied!");
   };
-
   const deleteInviteCode = async () => {
     try {
       await DeleteInviteCode(groupValue, inviteKey);
     } catch (err) {
-      console.log(err.code);
+      //console.log(err.code);
     }
   };
   return (

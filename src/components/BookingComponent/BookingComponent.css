@@ -1,0 +1,47 @@
+.booking-schedule {
+  display: flex;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.booking-schedule-ticks {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  border-right: 1px solid #ccc;
+  background-color: #f7f7f7;
+}
+
+.booking-schedule-tick {
+  font-size: 12px;
+  color: #666;
+}
+
+.booking-schedule-grid {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 12px;
+}
+
+.booking-slot {
+  padding: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.booking-slot--available {
+  background-color: #d1f5d3;
+}
+
+.booking-slot--unavailable {
+  background-color: #f5d1d1;
+  cursor: not-allowed;
+}
+
+.booking-slot:hover {
+  background-color: #e6e6e6;
+}

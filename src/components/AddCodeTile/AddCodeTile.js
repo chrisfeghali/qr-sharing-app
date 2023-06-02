@@ -1,4 +1,4 @@
-import { Card } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 import { database, ref } from "../../apis/firebase";
 import { useObjectVal } from "react-firebase-hooks/database";
 import QRCode from "../QRCode/QRCode";
@@ -12,10 +12,9 @@ const AddCodeTile = ({ handleClose, codeKey, ...props }) => {
   const handleCardClick = async () => {
     try {
       await AddCodeToGroup(codeKey, groupValue);
-      console.log(`${codeKey} added to group`);
       handleClose();
     } catch (err) {
-      console.log(err.code);
+      //console.log(err.code);
     }
   };
 
@@ -25,6 +24,7 @@ const AddCodeTile = ({ handleClose, codeKey, ...props }) => {
         <>
           <Card
             style={{
+              margin: "0 auto",
               width: "15rem",
               cursor: "pointer",
             }}

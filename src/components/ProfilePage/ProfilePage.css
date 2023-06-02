@@ -1,0 +1,12 @@
+.update-form{
+  display: flex;
+  flex-direction: row;
+}
+
+/* Styles for mobile devices (up to 768px width) */
+@media (max-width: 768px) {
+  .update-form{
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import CodeSection from "../CodeSection/CodeSection";
 import AddCodeTile from "../AddCodeTile/AddCodeTile";
 
@@ -14,13 +15,14 @@ const AddCodeButton = () => {
   };
   return (
     <>
-      <Button onClick={handleCardClick}>Add Code to Group</Button>
+      <Button onClick={handleCardClick}>+</Button>
       <Modal show={showModalAdd} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add QR Code</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <CodeSection
+            emptyMessage={`Add a code in the "My Codes" page before adding it to a group`}
             codeObject={(props) => (
               <AddCodeTile handleClose={handleClose} {...props}></AddCodeTile>
             )}

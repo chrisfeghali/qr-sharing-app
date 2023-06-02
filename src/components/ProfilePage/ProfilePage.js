@@ -1,3 +1,4 @@
+import "./ProfilePage.css";
 import Button from "react-bootstrap/Button";
 import { useAuth } from "../../contexts/AuthContext";
 import { useForm } from "react-hook-form";
@@ -5,9 +6,16 @@ import InputField from "../inputfield/InputField";
 import Form from "react-bootstrap/Form";
 
 const ProfilePage = () => {
-  const { updateEmail, updatePassword, updateName, setEmail, setUserName } =
-    useAuth();
-
+  const {
+    updateEmail,
+    updatePassword,
+    updateName,
+    setEmail,
+    setUserName,
+    currentUser,
+  } = useAuth();
+  const isGoogleAuth =
+    currentUser.providerData[0].providerId.includes("google");
   async function handleUpdateEmail(email) {
     try {
       await updateEmail(email);
@@ -44,7 +52,7 @@ const ProfilePage = () => {
           alert("Error during email update, please contact me");
           break;
         default:
-          console.log(error.message);
+          //console.log(error.message);
           break;
       }
     }
@@ -74,7 +82,7 @@ const ProfilePage = () => {
           );
           break;
         default:
-          console.log(error.message);
+          //console.log(error.message);
           break;
       }
     }
@@ -95,7 +103,7 @@ const ProfilePage = () => {
           alert("Error during name update, please contact me");
           break;
         default:
-          console.log(error.message);
+          //console.log(error.message);
           break;
       }
     }
@@ -125,21 +133,14 @@ const ProfilePage = () => {
 
   return (
     <>
-      <div className="Sign w-50">
-        <div className="Sign-header">
-          <span className="fs-3 mb-2">Edit Profile</span>
-        </div>
+      <div style={{ position: "absolute", top: "30px" }}>Edit Profile</div>
+      <div className="Sign">
         <Form
           className="Sign-form "
           noValidate
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
+          <div className="update-form">
             <InputField
               label="New Name"
               register={register}
@@ -158,47 +159,52 @@ const ProfilePage = () => {
               errors={errors}
             />
           </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <InputField
-              label="New Email Address"
-              register={register}
-              type="email"
-              errors={errors}
-              pattern={/^\S+@\S+$/i}
-            />
-            <InputField
-              label="Confirm New Email Address"
-              register={register}
-              type="text"
-              hide={watch("New Email Address", "") === "" ? true : false}
-              required={watch("New Email Address") === "" ? false : true}
-              validate={(value) =>
-                value === watch("New Email Address") || "Emails do not match."
-              }
-              errors={errors}
-            />
-          </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <InputField
-              label="New Password"
-              register={register}
-              type="password"
-              errors={errors}
-              minLength="6"
-            />
+          {!isGoogleAuth && (
+            <>
+              <div className="update-form">
+                <InputField
+                  label="New Email Address"
+                  register={register}
+                  type="email"
+                  errors={errors}
+                  pattern={/^\S+@\S+$/i}
+                />
+                <InputField
+                  label="Confirm New Email Address"
+                  register={register}
+                  type="text"
+                  hide={watch("New Email Address", "") === "" ? true : false}
+                  required={watch("New Email Address") === "" ? false : true}
+                  validate={(value) =>
+                    value === watch("New Email Address") ||
+                    "Emails do not match."
+                  }
+                  errors={errors}
+                />
+              </div>
+              <div className="update-form">
+                <InputField
+                  label="New Password"
+                  register={register}
+                  type="password"
+                  errors={errors}
+                  minLength="6"
+                />
 
-            <InputField
-              label="Confirm New Password"
-              register={register}
-              type="password"
-              errors={errors}
-              hide={watch("New Password", "") === "" ? true : false}
-              required={watch("New Password") === "" ? false : true}
-              validate={(value) =>
-                value === watch("New Password") || "Passwords do not match."
-              }
-            />
-          </div>
+                <InputField
+                  label="Confirm New Password"
+                  register={register}
+                  type="password"
+                  errors={errors}
+                  hide={watch("New Password", "") === "" ? true : false}
+                  required={watch("New Password") === "" ? false : true}
+                  validate={(value) =>
+                    value === watch("New Password") || "Passwords do not match."
+                  }
+                />
+              </div>
+            </>
+          )}
           <div className="Sign-password-bottom mt-2  ">
             <Button className="Sign-signin-button" type="submit">
               Update

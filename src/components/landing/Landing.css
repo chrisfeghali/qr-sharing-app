@@ -73,3 +73,22 @@
   text-align: start;
   padding-left: 1rem;
 }
+
+
+/* Styles for mobile devices (up to 768px width) */
+@media (max-width: 768px) {
+  .Landing-contents {
+    flex-direction: column;
+    min-height: 85vh;
+  }
+  .Landing-left {
+    width: 100%;
+    margin-top: 40px
+  }
+  .Landing-right {
+    margin: auto 10px;
+  }
+  .Sign-signin-button {
+    width: 100%;
+  }
+}

@@ -44,6 +44,19 @@
   border-top: 1px solid var(--bs-primary);
 }
 
+.sidebar-text {
+  max-width: 295px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sidebar-button-text {
+  max-width: 232px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block !important;
+  text-align: inherit;
+}
+
 
 
 .sidebar .sidebar-button:focus,

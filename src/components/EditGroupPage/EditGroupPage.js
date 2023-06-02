@@ -7,14 +7,13 @@ import { DeleteGroup } from "../../apis/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 
 const EditGroupPage = () => {
-  const { groupName, updateGroupName, setGroupName } = useGroup();
+  const { updateGroupName } = useGroup();
   const params = useParams();
   const navigate = useNavigate();
 
   async function handleUpdateGroupName(name) {
     try {
       await updateGroupName(name);
-      setGroupName(name);
       setValue("New Name", "");
       setValue("Confirm New Name", "");
       setError("New Name", {
@@ -22,7 +21,7 @@ const EditGroupPage = () => {
         message: `Name changed!`,
       });
     } catch (error) {
-      console.log(error.message);
+      //console.log(error.message);
     }
   }
   const {
@@ -44,39 +43,18 @@ const EditGroupPage = () => {
 
   return (
     <>
-      <div className="Sign w-50">
-        <div className="Sign-header">
-          <span className="fs-3 mb-2">Edit Group - {groupName}</span>
-        </div>
-        <Button
-          onClick={async () => {
-            try {
-              await DeleteGroup(params.groupID);
-              navigate("/home/homepage", { replace: true });
-            } catch (error) {
-              console.log(error);
-            }
-          }}
-        >
-          Remove Group
-        </Button>
+      <div className="Sign">
         <Form
           className="Sign-form "
           noValidate
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-            }}
-          >
+          <div className="update-form">
             <InputField
               label="New Name"
               register={register}
               type="text"
               errors={errors}
-              className=" w-50"
             />
             <InputField
               label="Confirm New Name"
@@ -88,13 +66,27 @@ const EditGroupPage = () => {
                 value === watch("New Name") || "Names do not match."
               }
               errors={errors}
-              className=" w-50"
             />
           </div>
 
           <div className="Sign-password-bottom mt-2  ">
             <Button className="Sign-signin-button" type="submit">
               Update
+            </Button>
+          </div>
+          <div className="Sign-password-bottom mt-4  ">
+            <Button
+              className="Sign-signin-button"
+              onClick={async () => {
+                try {
+                  await DeleteGroup(params.groupID);
+                  navigate("/home/homepage", { replace: true });
+                } catch (error) {
+                  //console.log(error);
+                }
+              }}
+            >
+              Remove Group
             </Button>
           </div>
         </Form>

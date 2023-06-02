@@ -5,6 +5,7 @@ import ConditionalWrapper from "../ConditionalWrapper/ConditionalWrapper";
 import { LinkContainer } from "react-router-bootstrap";
 
 const CollapsibleButton = ({
+  buttonClassName,
   parentClassName,
   startOpen = false,
   buttonName,
@@ -26,11 +27,10 @@ const CollapsibleButton = ({
         )}
       >
         <ButtonSrc
-          className="collapsible-button"
+          className={`collapsible-button ${buttonClassName}`}
           onClick={() => {
             setOpen(!open);
             sendOpenValue && sendOpenValue(open);
-            sendOpenValue && console.log("open " + open);
           }}
           role="button"
           aria-controls="example-collapse-text"
