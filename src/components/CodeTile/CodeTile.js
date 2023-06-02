@@ -160,6 +160,10 @@ const CodeTile = ({ codeKey, ...props }) => {
                   step={1}
                   min={0}
                   max={watch("Uses per day")}
+                  validate={(value) =>
+                    value <= watch("Uses per day") ||
+                    "Must be less than Uses per day"
+                  }
                   required={true}
                   errors={errors}
                 />
