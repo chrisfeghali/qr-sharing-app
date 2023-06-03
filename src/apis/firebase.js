@@ -21,6 +21,7 @@ import {
 import { getAuth } from "firebase/auth";
 // import { connectAuthEmulator } from "firebase/auth";
 import { xxhash128 } from "hash-wasm";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -47,6 +48,11 @@ const database = getDatabase(app);
 // if (window.location.hostname === "localhost") {
 //   connectAuthEmulator(auth, "http://localhost:9099");
 // }
+
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider("6Lc7iWYmAAAAAFiGanrthnv4PMzG789gOgB_I4j4"),
+  isTokenAutoRefreshEnabled: true,
+});
 
 const CreateUserInDatabase = async (uid, userName, email) => {
   const updates = {};
