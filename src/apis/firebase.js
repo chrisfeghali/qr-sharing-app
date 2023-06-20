@@ -314,6 +314,11 @@ const AddUserToGroup = async (joinCode) => {
     await get(child(ref(database), `/invites/${joinCode}`))
   ).val();
 
+  //Return if groupKey isn't valid
+  if (!groupKey) {
+    return;
+  }
+
   //Check if already part of group
   const alreadyJoined = (
     await get(
