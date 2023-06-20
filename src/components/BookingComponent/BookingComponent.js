@@ -18,7 +18,7 @@ const BookingComponent = () => {
   const dayMilliseconds = 1000;
 
   const heightTimeRatio = useMemo(
-    () => (window.innerHeight - 400) / (lookaheadHours * dayMinutes),
+    () => (window.innerHeight - 250) / (lookaheadHours * dayMinutes),
     [lookaheadHours]
   );
 
