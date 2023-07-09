@@ -3,7 +3,6 @@ import {
   GetCurrentTime,
   GetGroupAdmin,
   UpdateGroupName,
-  UpdateReservationTime,
   ResetCodeForToday,
   RemoveExpiredReservation,
   RemoveExpiredReservationAndIncrementUsesLeft,
@@ -261,12 +260,8 @@ export function GroupProvider({ children, ...props }) {
     [resolutionTime, reserveTime, minutesBetweenUses]
   );
 
-  const updateGroupName = async (groupName) => {
-    return await UpdateGroupName(groupValue, groupName);
-  };
-
-  const updateReservationTime = async (reservationTime) => {
-    return await UpdateReservationTime(groupValue, reservationTime);
+  const updateGroupName = (groupName) => {
+    return UpdateGroupName(groupValue, groupName);
   };
 
   useEffect(() => {
@@ -301,7 +296,6 @@ export function GroupProvider({ children, ...props }) {
     loading,
     updateGroupName,
     updateCodes,
-    updateReservationTime,
     reserveTime,
     minutesBetweenUses,
     encodeReservations,
