@@ -68,7 +68,7 @@ const CreateGroup = async (groupName) => {
   updates[`/users/${auth.currentUser.uid}/groups/${newGroupKey}`] = true;
   updates[`/groups/${newGroupKey}/name`] = groupName;
   updates[`/groups/${newGroupKey}/members/${auth.currentUser.uid}`] = true;
-  updates[`/groups/${newGroupKey}/reserveTime`] = 10;
+  updates[`/groups/${newGroupKey}/reserveTime`] = 15;
   updates[`/groups/${newGroupKey}/minutesBetweenUses`] = 30;
   const updateVal = await update(ref(database), updates);
   return updateVal;
