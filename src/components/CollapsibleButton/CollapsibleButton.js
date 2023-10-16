@@ -3,6 +3,7 @@ import { useState } from "react";
 import Collapse from "react-bootstrap/Collapse";
 import ConditionalWrapper from "../ConditionalWrapper/ConditionalWrapper";
 import { LinkContainer } from "react-router-bootstrap";
+import { useSidebar } from "../../contexts/SidebarContext";
 
 const CollapsibleButton = ({
   buttonClassName,
@@ -13,10 +14,12 @@ const CollapsibleButton = ({
   conditionalStatement = null,
   buttonLink = null,
   sendOpenValue = null,
+  closeSidebarOnClick = false,
   ...props
 }) => {
-  const [open, setOpen] = useState(startOpen);
+  const [open, setOpenCollapse] = useState(startOpen);
   const ButtonSrc = props.buttonSrc;
+  const { setOpen } = useSidebar();
   return (
     <div className={`collapsible-button-parent ${parentClassName}`}>
       <ConditionalWrapper
@@ -29,8 +32,11 @@ const CollapsibleButton = ({
         <ButtonSrc
           className={`collapsible-button ${buttonClassName}`}
           onClick={() => {
-            setOpen(!open);
+            setOpenCollapse(!open);
             sendOpenValue && sendOpenValue(open);
+            if (closeSidebarOnClick && !open) {
+              setOpen(false);
+            }
           }}
           role="button"
           aria-controls="example-collapse-text"

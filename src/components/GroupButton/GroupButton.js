@@ -63,6 +63,7 @@ const GroupButton = ({ groupKey, ...props }) => {
         buttonClassName={"sidebar-button-text"}
         buttonName={groupName}
         startOpen={false}
+        closeSidebarOnClick={true}
         conditionalStatement="open === false"
         buttonLink={`group/${groupKey}/codes`}
         buttonSrc={(props) => <Button {...props}></Button>}
