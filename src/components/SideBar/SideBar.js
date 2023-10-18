@@ -1,7 +1,7 @@
 import "./SideBar.css";
 import Button from "react-bootstrap/Button";
 import CollapsibleBar from "../CollapsibleBar/CollapsibleBar";
-import logo from "../../logo.svg";
+import burger from "../../burger.svg";
 import CollapsibleButton from "../CollapsibleButton/CollapsibleButton";
 import GroupSection from "../GroupSection/GroupSection";
 import { LinkContainer } from "react-router-bootstrap";
@@ -21,7 +21,7 @@ const SideBar = () => {
     <div className="sidebar">
       <CollapsibleBar
         startOpen={true}
-        buttonSrc={(props) => <img {...props} src={logo} alt="logo" />}
+        buttonSrc={(props) => <img {...props} src={burger} alt="logo" />}
       >
         <div className="empty-space"></div>
         <LinkContainer to="/home/homepage">
