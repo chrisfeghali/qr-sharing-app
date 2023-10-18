@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.css": "/qr-sharing-app/static/css/main.d238c134.css",
-    "main.js": "/qr-sharing-app/static/js/main.d73171af.js",
+    "main.css": "/qr-sharing-app/static/css/main.97491b53.css",
+    "main.js": "/qr-sharing-app/static/js/main.c0af6873.js",
     "static/media/logo.svg": "/qr-sharing-app/static/media/logo.0aec91560fded3acabbb8c4c37e25ebd.svg",
     "index.html": "/qr-sharing-app/index.html",
-    "main.d238c134.css.map": "/qr-sharing-app/static/css/main.d238c134.css.map",
-    "main.d73171af.js.map": "/qr-sharing-app/static/js/main.d73171af.js.map"
+    "static/media/burger.svg": "/qr-sharing-app/static/media/burger.2e97b2098f59c8806dc821d04ab5d442.svg",
+    "main.97491b53.css.map": "/qr-sharing-app/static/css/main.97491b53.css.map",
+    "main.c0af6873.js.map": "/qr-sharing-app/static/js/main.c0af6873.js.map"
   },
   "entrypoints": [
-    "static/css/main.d238c134.css",
-    "static/js/main.d73171af.js"
+    "static/css/main.97491b53.css",
+    "static/js/main.c0af6873.js"
   ]
 }
